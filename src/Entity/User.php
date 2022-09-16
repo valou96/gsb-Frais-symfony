@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,6 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 55, nullable: true)]
     private ?\DateTime $dateEmbauche = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FicheFrais::class, orphanRemoval: true)]
+    private Collection $ficheFrais;
+
+    public function __construct()
+    {
+        $this->ficheFrais = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -184,6 +194,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateEmbauche(?\DateTime $dateEmbauche): self
     {
         $this->dateEmbauche = $dateEmbauche;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FicheFrais>
+     */
+    public function getFicheFrais(): Collection
+    {
+        return $this->ficheFrais;
+    }
+
+    public function addFicheFrai(FicheFrais $ficheFrai): self
+    {
+        if (!$this->ficheFrais->contains($ficheFrai)) {
+            $this->ficheFrais->add($ficheFrai);
+            $ficheFrai->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheFrai(FicheFrais $ficheFrai): self
+    {
+        if ($this->ficheFrais->removeElement($ficheFrai)) {
+            // set the owning side to null (unless already changed)
+            if ($ficheFrai->getUser() === $this) {
+                $ficheFrai->setUser(null);
+            }
+        }
 
         return $this;
     }
