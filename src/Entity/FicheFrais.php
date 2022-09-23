@@ -34,12 +34,12 @@ class FicheFrais
 
     #[ORM\ManyToOne(inversedBy: 'fichefrais')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?etat $etat = null;
+    private ?Etat $etat = null;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: ligneHorsForfait::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneHorsForfait::class, orphanRemoval: true)]
     private Collection $ligneHorsForfait;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: ligneFraisForfait::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, orphanRemoval: true)]
     private Collection $ligneFraisForfait;
 
 
@@ -114,12 +114,12 @@ class FicheFrais
         return $this;
     }
 
-    public function getEtat(): ?etat
+    public function getEtat(): ?Etat
     {
         return $this->etat;
     }
 
-    public function setEtat(?etat $etat): self
+    public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
 
@@ -127,14 +127,14 @@ class FicheFrais
     }
 
     /**
-     * @return Collection<int, ligneHorsForfait>
+     * @return Collection<int, LigneHorsForfait>
      */
     public function getLigneHorsForfait(): Collection
     {
         return $this->ligneHorsForfait;
     }
 
-    public function addLigneHorsForfait(ligneHorsForfait $ligneHorsForfait): self
+    public function addLigneHorsForfait(LigneHorsForfait $ligneHorsForfait): self
     {
         if (!$this->ligneHorsForfait->contains($ligneHorsForfait)) {
             $this->ligneHorsForfait->add($ligneHorsForfait);
@@ -144,7 +144,7 @@ class FicheFrais
         return $this;
     }
 
-    public function removeLigneHorsForfait(ligneHorsForfait $ligneHorsForfait): self
+    public function removeLigneHorsForfait(LigneHorsForfait $ligneHorsForfait): self
     {
         if ($this->ligneHorsForfait->removeElement($ligneHorsForfait)) {
             // set the owning side to null (unless already changed)
@@ -169,14 +169,14 @@ class FicheFrais
     }
 
     /**
-     * @return Collection<int, ligneFraisForfait>
+     * @return Collection<int, LigneFraisForfait>
      */
     public function getLigneFraisForfait(): Collection
     {
         return $this->ligneFraisForfait;
     }
 
-    public function addLigneFraisForfait(ligneFraisForfait $ligneFraisForfait): self
+    public function addLigneFraisForfait(LigneFraisForfait $ligneFraisForfait): self
     {
         if (!$this->ligneFraisForfait->contains($ligneFraisForfait)) {
             $this->ligneFraisForfait->add($ligneFraisForfait);
@@ -186,7 +186,7 @@ class FicheFrais
         return $this;
     }
 
-    public function removeLigneFraisForfait(ligneFraisForfait $ligneFraisForfait): self
+    public function removeLigneFraisForfait(LigneFraisForfait $ligneFraisForfait): self
     {
         if ($this->ligneFraisForfait->removeElement($ligneFraisForfait)) {
             // set the owning side to null (unless already changed)

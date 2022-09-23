@@ -22,7 +22,7 @@ class LigneFraisForfait
 
     #[ORM\ManyToOne(inversedBy: 'ligneFraisForfait')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?fraisForfait $fraisForfait = null;
+    private ?FraisForfait $fraisForfait = null;
 
     public function getId(): ?int
     {
@@ -53,12 +53,12 @@ class LigneFraisForfait
         return $this;
     }
 
-    public function getFraisForfait(): ?fraisForfait
+    public function getFraisForfait(): ?FraisForfait
     {
         return $this->fraisForfait;
     }
 
-    public function setFraisForfait(?fraisForfait $fraisForfait): self
+    public function setFraisForfait(?FraisForfait $fraisForfait): self
     {
         $this->fraisForfait = $fraisForfait;
 
