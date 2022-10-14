@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FraisForfaitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FraisForfaitRepository::class)]
@@ -15,8 +16,8 @@ class FraisForfait
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $montant = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2)]
+    private ?string $montant = null;
 
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
@@ -34,12 +35,12 @@ class FraisForfait
         return $this->id;
     }
 
-    public function getMontant(): ?int
+    public function getMontant(): ?string
     {
         return $this->montant;
     }
 
-    public function setMontant(int $montant): self
+    public function setMontant(string $montant): self
     {
         $this->montant = $montant;
 
