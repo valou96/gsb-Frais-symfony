@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FicheFraisController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ path('app_fiche_frais') }}! ✅</h1>
+
+    <div class="example-wrapper">
+        <h1>Les fiches frais de {{ app.user.nom}} {{ app.user.prenom }}</h1>
+
+        <ul>
+            {% for fiche in FicheFrais %}
+                <li>{{ fiche.id }} - {{ fiche.montantValide }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/src/Controller/FicheFraisController.php'|file_link(0) }}">src/Controller/FicheFraisController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/templates/fiche_frais/index.html.twig'|file_link(0) }}">templates/fiche_frais/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}
