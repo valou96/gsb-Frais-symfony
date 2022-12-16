@@ -29,6 +29,7 @@ class DataImportController extends AbstractController
             $newUser->setLogin($user->login);
             $newUser->setNom($user->nom);
             $newUser->setPrenom($user->prenom);
+            $newUser->setAdresse($user->adresse);
             $newUser->setCp($user->cp);
             $newUser->setVille($user->ville);
             $newUser->setDateEmbauche(new \DateTime($user->dateEmbauche));

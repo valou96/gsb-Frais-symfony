@@ -28,7 +28,7 @@ class CreateUserController extends AbstractController
         $newUser->setVille('Annecy');
         $newUser->setDateEmbauche(new \DateTime('2022-09-13'));
 
-        $plaintextpassword = 'toto'; //on stocke le mot de passe en clair dans une variable
+        $plaintextpassword = 'titi'; //on stocke le mot de passe en clair dans une variable
         $hashedpassword = $passwordHasher->hashPassword($newUser, $plaintextpassword); //on hache le mot de passe
         //grace à la méthode hashPassword()
         $newUser->setPassword($hashedpassword); //j'affecte le mot de passe haché à l'attribut Password de mon objet
