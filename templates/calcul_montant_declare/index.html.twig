@@ -9,12 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/src/Controller/CalculMontantDeclareController.php'|file_link(0) }}">src/Controller/CalculMontantDeclareController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/templates/calcul_montant_declare/index.html.twig'|file_link(0) }}">templates/calcul_montant_declare/index.html.twig</a></code></li>
+        {% for fiche in calculMontant %}
+            <li> Montant = {{ fiche.montant }} - Quantité = {{ fiche.quantite }} -  Total = {{  fiche.total }}</li>
+        {% endfor %}
     </ul>
+
 </div>
 {% endblock %}
