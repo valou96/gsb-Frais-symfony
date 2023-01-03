@@ -19,7 +19,7 @@ class LesFichesFraisDuUserController extends AbstractController
         $user = $this->getUser();
 
         $registry = $doctrine->getRepository(FicheFrais::class);
-        $fichesFraisDuUser = $registry->findBy(['user' => $user]);
+        $fichesFraisDuUser = $registry->findBy(['user' => $user]); // 'user' fait appel à la talbe user, $user stocker getUser
 
         return $this-> render('les_fiches_frais_du_user/index.html.twig', [
             'fichesFraisDuUser' => $fichesFraisDuUser
