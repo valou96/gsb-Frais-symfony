@@ -20,7 +20,6 @@ class CalculPrimeController extends AbstractController
 
         return $this->render('calcul_prime/index.html.twig', [
             'calculPrime' => $FicheFrais,
-
         ]);
     }
 }

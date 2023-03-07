@@ -8,21 +8,31 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ path('app_fiche_frais') }}! ✅</h1>
-
     <div class="example-wrapper">
         <h1>Les fiches frais de {{ app.user.nom}} {{ app.user.prenom }}</h1>
 
         <ul>
             {% for fiche in FicheFrais %}
                 <li>Total : {{ fiche.montantValide }}</li>
+                <li>nbJustificatif : {{ fiche.nbJustificatif }}</li>
+                {% if fiche.etat.id == 1 %}
+                    <li>Etat : Saisie cloturée</li>
+                {% elseif fiche.etat.id == 2 %}
+                    <li>Etat : Fiche créée, saisie en cours</li>
+                {% elseif fiche.etat.id == 3 %}
+                    <li>Etat : Remboursée</li>
+                {% elseif fiche.etat.id == 4 %}
+                    <li>Etat : Validée et mise en paiement</li>
+                {% endif %}
+                <li>date do modification : {{ fiche.dateModif|date('d-m-Y') }}</li>
+                <li>Mois : {{ fiche.mois }}</li>
             {% endfor %}
         </ul>
     </div>
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/src/Controller/FicheFraisController.php'|file_link(0) }}">src/Controller/FicheFraisController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/templates/fiche_frais/index.html.twig'|file_link(0) }}">templates/fiche_frais/index.html.twig</a></code></li>
-    </ul>
+    <div class="col">
+        <a href="{{ path('app_new_fiche_frais') }}">
+            <button class="btn btn-primary">Ajouter</button>
+        </a>
+    </div>
 </div>
 {% endblock %}

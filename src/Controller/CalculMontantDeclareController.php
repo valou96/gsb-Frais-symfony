@@ -37,3 +37,4 @@ class CalculMontantDeclareController extends AbstractController
         ]);
     }
 }
+
