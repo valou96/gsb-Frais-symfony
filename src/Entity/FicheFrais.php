@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FicheFraisRepository;
+use Decimal\Decimal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -41,6 +42,7 @@ class FicheFrais
 
     #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, orphanRemoval: true)]
     private Collection $ligneFraisForfait;
+
 
 
     public function __construct()
@@ -197,4 +199,21 @@ class FicheFrais
 
         return $this;
     }
+
+    /**
+     * @return float
+     */
+    public function getMontantLigneFrais(){
+        $toto = $this->getLigneFraisForfait();
+        $tata = $this->getLigneHorsForfait();
+        $total = 0;
+        foreach ($toto as $uneligneFraisForfait){
+            $total += $uneligneFraisForfait->getQuantite() * $uneligneFraisForfait->getFraisForfait()->getMontant();
+        }
+        foreach ($tata as $fraisHorsForfait){
+            $total += $fraisHorsForfait->getMontant();
+        }
+        return $total;
+    }
+
 }

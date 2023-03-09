@@ -10,14 +10,14 @@
 
 <div class="example-wrapper">
 
-
     <ul>
         {% for fiche in calculPrime %}
             <li>{{ fiche.id }} - Montant validé = {{ fiche.montantValide }} -  Prime = {{  fiche.montantValide * 0.095 }}</li>
         {% endfor %}
     </ul>
-
-
+    <p>montant cumulé de janvier = {{ calculPrime }}</p>
+    <p>montant cumulé de janvier par visiteur = {{ parvisiteur}}</p>
+    <p>montant total de Frais Forfait = {{ montantTotal}}</p>
 
 </div>
 {% endblock %}
