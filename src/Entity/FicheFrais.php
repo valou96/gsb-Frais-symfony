@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FicheFraisRepository;
-use Decimal\Decimal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -33,7 +32,7 @@ class FicheFrais
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'fichefrais')]
+    #[ORM\ManyToOne(inversedBy: 'fichefrais', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 

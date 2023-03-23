@@ -1,47 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FicheFraisController!{% endblock %}
+{% block title %}FicheFrais index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-    <div class="example-wrapper">
-        <body>
-            <h1>Les fiches frais de {{ app.user.nom }} {{ app.user.prenom }}</h1>
-            <table>
-                <tr>
-                    <th>Total des montants validé</th>
-                    <th>Nombre de justificatif</th>
-                    <th>Etat</th>
-                    <th>Date de modification</th>
-                    <th>Mois</th>
-                </tr>
-                    {% for fiche in FicheFrais %}
-                        <tr>
-                            <td>{{ fiche.montantValide }}</td>
-                            <td>{{ fiche.nbJustificatif }}</td>
-                            {% if fiche.etat.id == 1 %}
-                                <td>Saisie cloturée</td>
-                            {% elseif fiche.etat.id == 2 %}
-                                <td>Fiche créée, saisie en cours</td>
-                            {% elseif fiche.etat.id == 3 %}
-                                <td>Remboursée</td>
-                            {% elseif fiche.etat.id == 4 %}
-                                <td>Validée et mise en paiement</td>
-                            {% endif %}
-                            <td>{{ fiche.dateModif|date('d-m-Y') }}</td>
-                            <td>{{ fiche.mois }}</td>
-                        </tr>
-                    {% endfor %}
-            </table>
-        </body>
+    <h1>Les fiches frais de {{ app.user.nom }} {{ app.user.prenom }}</h1>
+    {{ form_start(form) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+    <table>
+        <tr>
+            <th>Total des montants validé</th>
+            <th>Nombre de justificatif</th>
+            <th>Etat</th>
+            <th>Date de modification</th>
+            <th>Mois</th>
+        </tr>
+        {% for fiche in FicheFrais %}
+            <tr>
+                <td>{{ fiche.montantValide }}</td>
+                <td>{{ fiche.nbJustificatif }}</td>
+                <td>{{ fiche.etat.libelle }}</td>
+                <td>{{ fiche.dateModif|date('d-m-Y') }}</td>
+                <td>{{ fiche.mois }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </body>
     </html>
     <div class="col">
-        <a href="{{ path('app_new_fiche_frais') }}">
+        <a href="{{ path('app_fiche_frais_new') }}">
             <button class="btn btn-primary">Ajouter</button>
         </a>
     </div>
-</div>
+    </div>
+        </tbody>
+    </table>
 {% endblock %}
