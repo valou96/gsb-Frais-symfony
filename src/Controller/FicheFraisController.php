@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\FicheFrais;
+use App\Entity\FraisForfait;
+use App\Entity\LigneFraisForfait;
 use App\Form\FicheFrais1Type;
 use App\Repository\FicheFraisRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,24 +17,33 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/ficheFrais')]
 class FicheFraisController extends AbstractController
 {
-    #[Route('/', name: 'app_fiche_frais_index', methods: ['GET'])]
+    #[Route('/', name: 'app_fiche_frais_index', methods: ['GET', 'POST'])]
     public function index(EntityManagerInterface $doctrine, Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+
         $moisUser = [];
         $repository = $doctrine->getRepository(FicheFrais::class);
+
         $lesfichesFrais = $repository->findBy(['user'=>$user]);
 
             foreach ($lesfichesFrais as $uneFicheFrais) {
                 $moisUser[] = $uneFicheFrais->getMois();
             }
+
         $form = $this->createForm(FicheFrais1Type::class, null, ['mois'=>$moisUser]);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mois = $form->getData();
+            $uneFicheMois = $repository->findBy(['user'=>$user, 'mois'=>$mois]);
+        }
         return $this->renderForm('fiche_frais/index.html.twig', [
             'FicheFrais' => $lesfichesFrais,
             'mois' => $moisUser,
-            'form' =>$form,
+            'form' => $form,
+            'uneFicheMois' => $uneFicheMois,
+
         ]);
     }
 

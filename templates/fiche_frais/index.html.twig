@@ -15,13 +15,45 @@
             <th>Date de modification</th>
             <th>Mois</th>
         </tr>
-        {% for fiche in FicheFrais %}
+        {% for fiche in uneFicheMois %}
             <tr>
                 <td>{{ fiche.montantValide }}</td>
                 <td>{{ fiche.nbJustificatif }}</td>
                 <td>{{ fiche.etat.libelle }}</td>
                 <td>{{ fiche.dateModif|date('d-m-Y') }}</td>
                 <td>{{ fiche.mois }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <table>
+        <tr>
+            <th>Forfait etape</th>
+            <th>Frais kilométrique</th>
+            <th>Nuité hotel</th>
+            <th>Repas Restaurant</th>
+        </tr>
+        {% for fiche in uneFicheMois %}
+            <tr>
+                <td>{{ fiche.ligneFraisForfait[0].quantite }}</td>
+                <td>{{ fiche.ligneFraisForfait[1].quantite }}</td>
+                <td>{{ fiche.ligneFraisForfait[2].quantite }}</td>
+                <td>{{ fiche.ligneFraisForfait[3].quantite }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Libelle</th>
+            <th>Montant</th>
+        </tr>
+        {% for fiche in uneFicheMois %}
+            <tr>
+                <td>{{ fiche.ligneHorsForfait[0].date|date('d-m-Y') }}</td>
+                <td>{{ fiche.ligneHorsForfait[0].libelle }}</td>
+                <td>{{ fiche.ligneHorsForfait[0].montant }}</td>
             </tr>
         {% endfor %}
     </table>

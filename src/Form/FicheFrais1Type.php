@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\FicheFrais;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,9 @@ class FicheFrais1Type extends AbstractType
                 return $value;
                 },
                 'label' => 'Mois',
-            ]);
+            ])
+            ->add('submit', SubmitType::class);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
