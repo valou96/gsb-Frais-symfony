@@ -21,6 +21,7 @@ class FicheFraisController extends AbstractController
     public function index(EntityManagerInterface $doctrine, Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $uneFicheMois = null;
         $user = $this->getUser();
 
         $moisUser = [];
@@ -28,18 +29,18 @@ class FicheFraisController extends AbstractController
 
         $lesfichesFrais = $repository->findBy(['user'=>$user]);
 
-            foreach ($lesfichesFrais as $uneFicheFrais) {
-                $moisUser[] = $uneFicheFrais->getMois();
-            }
+        foreach ($lesfichesFrais as $uneFicheFrais) {
+            $moisUser[] = $uneFicheFrais->getMois();
+        }
 
         $form = $this->createForm(FicheFrais1Type::class, null, ['mois'=>$moisUser]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $mois = $form->getData();
-            $uneFicheMois = $repository->findBy(['user'=>$user, 'mois'=>$mois]);
+            $uneFicheMois = $repository->findOneBy(['user'=>$user, 'mois'=>$mois]);
         }
-        return $this->renderForm('fiche_frais/index.html.twig', [
-            'FicheFrais' => $lesfichesFrais,
+        return $this->render('fiche_frais/index.html.twig', [
+
             'mois' => $moisUser,
             'form' => $form,
             'uneFicheMois' => $uneFicheMois,
