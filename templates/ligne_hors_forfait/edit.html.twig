@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LigneHorsForfait{% endblock %}
+
+{% block body %}
+    <h1>Edit LigneHorsForfait</h1>
+
+    {{ include('ligne_hors_forfait/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_ligne_hors_forfait_index') }}">back to list</a>
+
+    {{ include('ligne_hors_forfait/_delete_form.html.twig') }}
+{% endblock %}
