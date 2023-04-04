@@ -21,6 +21,15 @@ class LigneFraisForfaitType extends AbstractType
                 'label' => 'Saisissez la quantité ',
 
             ])
+            ->add('libelle', ChoiceType::class, [
+                'choices' => [
+                    'ETP' => 1,
+                    'KM' => 2,
+                    'NUI' => 3,
+                    'REP' => 4,]
+
+            ])
+
         ;
     }
 
