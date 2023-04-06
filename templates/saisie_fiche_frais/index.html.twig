@@ -10,14 +10,48 @@
 {# <div>Fiche frais du {{ fiche_frai.dateModif }}</div>#}
 <div class="example-wrapper">
     {{ form_start(formFF) }}
-    {{ form_widget(formFF) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="row mb-3">
+        <div class="form-floating">
+            {{ form_row(formFF.libelleETP) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="form-floating">
+            {{ form_row(formFF.libelleKM) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="form-floating">
+            {{ form_row(formFF.libelleNUI) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="form-floating">
+            {{ form_row(formFF.libelleREP) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Valider les frais forfait</button>
     {{ form_end(formFF) }}
+
 </div>
     <div class="example-wrapper">
         {{ form_start(formHF) }}
-        {{ form_widget(formHF) }}
-        <button class="btn">{{ button_label|default('Save') }}</button>
+        <div class="row mb-3">
+            <div class="form-floating">
+                {{ form_row(formHF.libelle) }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="form-floating">
+                {{ form_row(formHF.montant) }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="form-floating">
+                {{ form_row(formHF.date) }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Valider les frais hors forfait</button>
         {{ form_end(formHF) }}
     </div>
 {% endblock %}

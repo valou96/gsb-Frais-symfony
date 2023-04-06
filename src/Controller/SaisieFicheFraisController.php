@@ -152,8 +152,8 @@ class SaisieFicheFraisController extends AbstractController
 
             return $this->render('saisie_fiche_frais/index.html.twig', [
                 'fiche_frai' => $fichesFraisEnCours,
-                'formHF' => $formHF,
-                'formFF' => $formFF,
+                'formHF' => $formHF->createView(),
+                'formFF' => $formFF->createView(),
             ]);
         }
 

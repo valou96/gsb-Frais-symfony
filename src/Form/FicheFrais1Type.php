@@ -22,8 +22,7 @@ class FicheFrais1Type extends AbstractType
                 return $value;
                 },
                 'label' => 'Mois',
-            ])
-            ->add('submit', SubmitType::class);
+            ]);
 
     }
 

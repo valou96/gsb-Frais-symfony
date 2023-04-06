@@ -19,27 +19,22 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Connection</a>
+                {% if app.user %}
+                    <a class="navbar-brand">Bienvenue {{ app.user.nom }}</a>
+                {% else %}
+                    <a class="navbar-brand">Penses à te connecter</a>
+                {% endif %}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/ficheFrais">Les fiches de frais</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/ficheFrais"> Fiches de frais</a>
+                            <a class="nav-link" href="{{ path('app_saisie_fiche_frais_new') }}">Ajouter une fiche de frais</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_saisie_fiche_frais_new') }}"> Globe</a>
-                        </li>
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-envelope"></i> Envelope</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-trash"></i> Trash</a>
-                        </li>-->
                     </ul>
                 </div>
             </div>
