@@ -17,16 +17,20 @@ class LigneFraisForfaitType extends AbstractType
     {
         $builder
 
-            ->add('quantite', IntegerType::class, [
-                'label' => 'Saisissez la quantité ',
+            ->add('libelleETP', IntegerType::class, [
+                'label' => 'Saisissez les frais Etapes',
 
             ])
-            ->add('libelle', ChoiceType::class, [
-                'choices' => [
-                    'ETP' => 1,
-                    'KM' => 2,
-                    'NUI' => 3,
-                    'REP' => 4,]
+            ->add('libelleKM', IntegerType::class, [
+                'label' => 'Saisissez les frais kilométriques',
+
+            ])
+            ->add('libelleNUI', IntegerType::class, [
+                'label' => 'Saisissez les frais nuités ',
+
+            ])
+            ->add('libelleREP', IntegerType::class, [
+                'label' => 'Saisissez les frais REP',
 
             ])
 
@@ -36,7 +40,7 @@ class LigneFraisForfaitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => LigneHorsForfait::class,
+
         ]);
     }
 }

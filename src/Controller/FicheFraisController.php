@@ -62,7 +62,7 @@ class FicheFraisController extends AbstractController
             return $this->redirectToRoute('app_fiche_frais_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('fiche_frais/new.html.twig', [
+        return $this->render('fiche_frais/new.html.twig', [
             'fiche_frais' => $ficheFrais,
             'form' => $form,
         ]);
@@ -88,7 +88,7 @@ class FicheFraisController extends AbstractController
             return $this->redirectToRoute('app_fiche_frais_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('fiche_frais/edit.html.twig', [
+        return $this->render('fiche_frais/edit.html.twig', [
             'fiche_frai' => $ficheFrai,
             'form' => $form,
         ]);

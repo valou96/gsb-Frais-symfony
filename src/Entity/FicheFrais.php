@@ -36,10 +36,10 @@ class FicheFrais
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneHorsForfait::class, fetch: 'EAGER', orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneHorsForfait::class, fetch: 'EAGER', orphanRemoval: true, cascade: ['persist'])]
     private Collection $ligneHorsForfait;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, fetch: 'EAGER', orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, fetch: 'EAGER', orphanRemoval: true, cascade: ['persist'])]
     private Collection $ligneFraisForfait;
 
 
