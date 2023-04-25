@@ -29,6 +29,7 @@ class FicheFraisType extends AbstractType
                     IntlDateFormatter::GREGORIAN,
                     'MMMM YYYY'
                 );
+
                 return datefmt_format($fmt, $dateObj);
                 },
                 'label' => 'Mois',
