@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\FicheFrais;
 use App\Entity\FraisForfait;
 use App\Entity\LigneFraisForfait;
-use App\Form\FicheFrais1Type;
+use App\Form\FicheFraisType;
 use App\Repository\FicheFraisRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +34,7 @@ class FicheFraisController extends AbstractController
             $moisUser[] = $uneFicheFrais->getMois();
         }
 
-        $form = $this->createForm(FicheFrais1Type::class, null, ['mois'=>$moisUser]);
+        $form = $this->createForm(FicheFraisType::class, null, ['mois'=>$moisUser]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $mois = $form->getData();
@@ -53,7 +53,7 @@ class FicheFraisController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ficheFrais = new FicheFrais();
-        $form = $this->createForm(FicheFrais1Type::class, $ficheFrais);
+        $form = $this->createForm(FicheFraisType::class, $ficheFrais);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,7 +80,7 @@ class FicheFraisController extends AbstractController
     #[Route('/{id}/edit', name: 'app_fiche_frais_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, FicheFrais $ficheFrai, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(FicheFrais1Type::class, $ficheFrai);
+        $form = $this->createForm(FicheFraisType::class, $ficheFrai);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

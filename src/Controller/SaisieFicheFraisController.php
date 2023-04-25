@@ -35,32 +35,6 @@ class SaisieFicheFraisController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        /*saisie du mois ne cours
-        voir si la fiche existe
-        interdire l'acces à un utilisateur non authentifié
-        recuperer l'utilisateur authentifié
-        recuperer le mois en cours
-        recuperer la fiche de frais de l'utilisateur connecté pour le mois en cours
-        si elle n'existe pas, je l'a créé
-        form
-        formulaire pour les lignes de frais forfaitisé (etape, km, nuitée, repas)
-        textbox pour la quantité
-
-        controller
-        créer le formimaire
-        gerer la validation du formulaire
-        recuperer les quantités saisies dans le formulaire
-        mettre à jour les lignes de frais forfait de ma fiche frais du mois en cours
-        faire persister des données
-
-        Pour les frais hors forfait
-        créer un form
-        gerer la validation du formulaire
-        recuperer la date, le libelle et le montant saisie
-        créer une nouvelle ligne de frais hors forfait
-        ajouter cette ligne de frais hors forfait à la fiche frais du mois en cours
-        faire persister les données
-                */
 
         $date = new \DateTime('now');
         $mois = \date('Ym');

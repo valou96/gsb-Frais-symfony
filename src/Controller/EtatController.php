@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
-use App\Form\Etat1Type;
+use App\Form\EtatType;
 use App\Repository\EtatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class EtatController extends AbstractController
     public function new(Request $request, EtatRepository $etatRepository): Response
     {
         $etat = new Etat();
-        $form = $this->createForm(Etat1Type::class, $etat);
+        $form = $this->createForm(EtatType::class, $etat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class EtatController extends AbstractController
     #[Route('/{id}/edit', name: 'app_etat_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Etat $etat, EtatRepository $etatRepository): Response
     {
-        $form = $this->createForm(Etat1Type::class, $etat);
+        $form = $this->createForm(EtatType::class, $etat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
