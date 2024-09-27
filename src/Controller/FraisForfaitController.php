@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FraisForfait;
-use App\Form\FraisForfait1Type;
+use App\Form\FraisForfaitType;
 use App\Repository\FraisForfaitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class FraisForfaitController extends AbstractController
     public function new(Request $request, FraisForfaitRepository $fraisForfaitRepository): Response
     {
         $fraisForfait = new FraisForfait();
-        $form = $this->createForm(FraisForfait1Type::class, $fraisForfait);
+        $form = $this->createForm(FraisForfaitType::class, $fraisForfait);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class FraisForfaitController extends AbstractController
     #[Route('/{id}/edit', name: 'app_frais_forfait_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, FraisForfait $fraisForfait, FraisForfaitRepository $fraisForfaitRepository): Response
     {
-        $form = $this->createForm(FraisForfait1Type::class, $fraisForfait);
+        $form = $this->createForm(FraisForfaitType::class, $fraisForfait);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

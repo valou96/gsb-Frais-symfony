@@ -32,21 +32,29 @@ class FicheFrais
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'fichefrais')]
+    #[ORM\ManyToOne(inversedBy: 'fichefrais', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneHorsForfait::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneHorsForfait::class, fetch: 'EAGER', orphanRemoval: true, cascade: ['persist'])]
     private Collection $ligneHorsForfait;
 
-    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'ficheFrais', targetEntity: LigneFraisForfait::class, fetch: 'EAGER', orphanRemoval: true, cascade: ['persist'])]
     private Collection $ligneFraisForfait;
+
+    #[ORM\ManyToMany(targetEntity: Seminaire::class, inversedBy: 'ficheFrais')]
+    private Collection $seminaire;
+
+    #[ORM\Column]
+    private ?int $montantMax = 3550;
+
 
 
     public function __construct()
     {
         $this->ligneHorsForfait = new ArrayCollection();
         $this->ligneFraisForfait = new ArrayCollection();
+        $this->seminaire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,4 +205,57 @@ class FicheFrais
 
         return $this;
     }
+
+    /**
+     * @return float
+     */
+    public function getMontantLigneFrais(){
+        $toto = $this->getLigneFraisForfait();
+        $tata = $this->getLigneHorsForfait();
+        $total = 0;
+        foreach ($toto as $uneligneFraisForfait){
+            $total += $uneligneFraisForfait->getQuantite() * $uneligneFraisForfait->getFraisForfait()->getMontant();
+        }
+        foreach ($tata as $fraisHorsForfait){
+            $total += $fraisHorsForfait->getMontant();
+        }
+        return $total;
+    }
+
+    /**
+     * @return Collection<int, Seminaire>
+     */
+    public function getSeminaire(): Collection
+    {
+        return $this->seminaire;
+    }
+
+    public function addSeminaire(Seminaire $seminaire): self
+    {
+        if (!$this->seminaire->contains($seminaire)) {
+            $this->seminaire->add($seminaire);
+        }
+
+        return $this;
+    }
+
+    public function removeSeminaire(Seminaire $seminaire): self
+    {
+        $this->seminaire->removeElement($seminaire);
+
+        return $this;
+    }
+
+    public function getMontantMax(): ?int
+    {
+            return $this->montantMax;
+    }
+
+    public function setMontantMax(int $montantMax): self
+    {
+        $this->montantMax = $montantMax;
+
+        return $this;
+    }
+
 }

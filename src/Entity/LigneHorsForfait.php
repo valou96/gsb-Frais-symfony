@@ -27,6 +27,9 @@ class LigneHorsForfait
     #[ORM\JoinColumn(nullable: false)]
     private ?FicheFrais $ficheFrais = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ligneHorsForfaits')]
+    private ?Seminaire $seminaire = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class LigneHorsForfait
     public function setFicheFrais(?FicheFrais $ficheFrais): self
     {
         $this->ficheFrais = $ficheFrais;
+
+        return $this;
+    }
+
+    public function getSeminaire(): ?Seminaire
+    {
+        return $this->seminaire;
+    }
+
+    public function setSeminaire(?Seminaire $seminaire): self
+    {
+        $this->seminaire = $seminaire;
 
         return $this;
     }

@@ -1,28 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FicheFraisController!{% endblock %}
+{% block title %}FicheFrais index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ path('app_fiche_frais') }}! ✅</h1>
+        <body class="container mt-5">
+            <h1 class="mb-4">Les fiches frais de {{ app.user.nom }} {{ app.user.prenom }}</h1>
 
-    <div class="example-wrapper">
-        <h1>Les fiches frais de {{ app.user.nom}} {{ app.user.prenom }}</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    <div class="row mb-3">
+                        <div class="form-floating">
+                            {{ form_row(form.mois) }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Voir la fiche frais</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
-        <ul>
-            {% for fiche in FicheFrais %}
-                <li>{{ fiche.id }} - {{ fiche.montantValide }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/src/Controller/FicheFraisController.php'|file_link(0) }}">src/Controller/FicheFraisController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/chailloux.valentin/GSB/GSB-Frais/templates/fiche_frais/index.html.twig'|file_link(0) }}">templates/fiche_frais/index.html.twig</a></code></li>
-    </ul>
-</div>
+            {% if uneFicheMois is not null %}
+
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Total des montants validé</th>
+                                <th>Nombre de justificatif</th>
+                                <th>Etat</th>
+                                <th>Date de modification</th>
+                                <th>Mois</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ uneFicheMois.montantValide }}</td>
+                                <td>{{ uneFicheMois.nbJustificatif }}</td>
+                                <td>{{ uneFicheMois.etat.libelle }}</td>
+                                <td>{{ uneFicheMois.dateModif|date('d-m-Y') }}</td>
+                                <td>{{ uneFicheMois.mois }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Forfait étape</th>
+                                <th>Frais kilométrique</th>
+                                <th>Nuitée hotel</th>
+                                <th>Repas Restaurant</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for uneLFF in uneFicheMois.ligneFraisForfait %}
+                                    <td>{{ uneLFF.quantite }}</td>
+                                {% endfor %}
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Libelle</th>
+                                <th>Montant</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for lfhf in uneFicheMois.ligneHorsForfait %}
+                                <tr>
+                                    <td>{{ lfhf.date|date('d-m-Y') }}</td>
+                                    <td>{{ lfhf.libelle }}</td>
+                                    <td>{{ lfhf.montant }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        </body>
 {% endblock %}
